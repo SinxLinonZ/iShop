@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return redirect('/login'); });
 
 Auth::routes([
     'register' => false
@@ -26,3 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::get('/redirect', [App\Http\Controllers\HomeController::class, 'loginRedierct'])->name('loginRedierct');
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('adminHome');
+Route::get('/client', [App\Http\Controllers\HomeController::class, 'clientHome'])->name('clientHome');
