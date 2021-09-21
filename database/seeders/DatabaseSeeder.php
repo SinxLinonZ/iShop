@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,13 +29,16 @@ class DatabaseSeeder extends Seeder
             'name' => "Admin",
             'email' => "asd.asd@asd.fgh",
             'password' => Hash::make('1234qwer'),
-            "role_id" => 1
+            "role_id" => 1,
+            'api_token' => Str::random(60),
         ]);
         DB::table('users')->insert([
             'name' => "Client",
             'email' => "aasd.asd@asd.fgh",
             'password' => Hash::make('1234qwer'),
-            "role_id" => 2
+            "role_id" => 2,
+            'api_token' => Str::random(60),
+
         ]);
     }
 }

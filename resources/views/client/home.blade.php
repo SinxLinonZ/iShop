@@ -2,6 +2,6 @@
 
 @section('content')
 
-<client id="{{ $id }}"></client>
+<client id="{{ auth()->user()->id }}" api_token="{{ auth()->user()->api_token }}"></client>
 
 @endsection

@@ -16,7 +16,7 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-
+    
 
     public function loginRedierct()
     {
@@ -37,7 +37,7 @@ class HomeController extends Controller
         $title = "iShop Client " . $user->id;
 
         $id = $user->id;
-        return view('client.home', compact('title', 'id'));
+        return view('client.home', compact('title'));
     }
 
     public function adminHome() {

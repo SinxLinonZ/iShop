@@ -11,6 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('../semantic/semantic');
+    window.anime = require('animejs').default;
 
 } catch (e) {}
 

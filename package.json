@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "animejs": "^3.2.1",
         "fomantic-ui": "^2.8.8"
     }
 }
