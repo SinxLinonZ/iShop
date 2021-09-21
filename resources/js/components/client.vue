@@ -57,7 +57,52 @@
     </div>
 
     <!-- shopping -->
-    <div id="shopping"></div>
+    <div id="shopping" style="display: none">
+      <div id="shopping-loader" style="display: none">
+        <div class="ui active centered inline loader huge"></div>
+      </div>
+
+      <div id="shopping-main" style="display: none">
+
+        <div id="shopping-content">
+          ララティーナ
+        </div>
+
+        <!-- side menu -->
+        <div id="shopping-sideMenu">
+          <p>{{ shopping.customer.name }}　様</p>
+          <div id="shopping-sideMenu-opBtn">
+            <div class="custom-btn" id="btn-shopping-add">
+              <img
+                height="60"
+                width="60"
+                src="https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg"
+                alt="icon"
+              />
+              追加
+            </div>
+            <div class="custom-btn" id="btn-shopping-remove">
+              <img
+                height="60"
+                width="60"
+                src="https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg"
+                alt="icon"
+              />
+              削除
+            </div>
+          </div>
+          <div class="custom-btn" id="btn-shopping-checkout">
+            <img
+              height="60"
+              width="60"
+              src="https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg"
+              alt="icon"
+            />
+            チェックアウト
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -130,6 +175,74 @@
   border-radius: 60px !important;
   margin-bottom: 2em !important;
 }
+
+/**
+ * Shopping
+ */
+#shopping {
+  height: 100%;
+  width: 100%;
+}
+
+#shopping-loader {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: grid;
+  place-items: center;
+  grid-template-rows: 100%;
+  grid-template-columns: 100%;
+}
+
+#shopping-main {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 70% 30%;
+}
+
+#shopping-content {
+  padding: 3em 3em;
+  font-size: 2em;
+}
+
+
+#shopping-sideMenu {
+  background: #007131;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  text-align: center;
+  color: #ffffff;
+  padding: 1.5em 0;
+
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 15% 65% 20%;
+  place-items: center;
+}
+
+#shopping-sideMenu > p {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+#shopping-sideMenu-opBtn {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  grid-template-rows: repeat(4, 25%);
+}
+
+#shopping-sideMenu > * > .custom-btn,
+#shopping-sideMenu > .custom-btn {
+  width: 60%;
+  height: 130px;
+  border-radius: 30px !important;
+  padding: 0.4em 0;
+  box-shadow: 5px 5px 5px #202020 !important;
+}
 </style>
 
 
@@ -140,27 +253,31 @@ export default {
      * For debug
      */
 
+    // setTimeout(() => {
+    //   this.priceChecked("コカ・コーラ", "200");
+    // }, 300);
+    // setTimeout(() => {
+    //   this.priceChecked("コーラ", "200");
+    // }, 1300);
+    // setTimeout(() => {
+    //   this.priceChecked("ららぽーと", "500");
+    // }, 5800);
+    // setTimeout(() => {
+    //   this.priceChecked("バカヤロ", "456");
+    // }, 13000);
+    // setTimeout(() => {
+    //   this.priceChecked("コカ・コーラ", "200");
+    // }, 14000);
+    // setTimeout(() => {
+    //   this.priceChecked("バカヤロ", "456");
+    // }, 16000);
+    // setTimeout(() => {
+    //   this.shoppingPressed(1);
+    // }, 18000);
+
     setTimeout(() => {
-      this.priceChecked("コカ・コーラ", "200");
-    }, 300);
-    setTimeout(() => {
-      this.priceChecked("コーラ", "200");
-    }, 1300);
-    setTimeout(() => {
-      this.priceChecked("ららぽーと", "500");
-    }, 5800);
-    setTimeout(() => {
-      this.priceChecked("バカヤロ", "456");
-    }, 13000);
-    setTimeout(() => {
-      this.priceChecked("コカ・コーラ", "200");
-    }, 14000);
-    setTimeout(() => {
-      this.priceChecked("バカヤロ", "456");
-    }, 16000);
-    setTimeout(() => {
-      this.shopping(1);
-    }, 18000);
+      this.shoppingPressed(1);
+    }, 200);
   },
 
   methods: {
@@ -171,6 +288,33 @@ export default {
       return str.replace(/[A-Za-z0-9]/g, function (s) {
         return String.fromCharCode(s.charCodeAt(0) + 0xfee0);
       });
+    },
+
+    buttonPressedFx(element) {
+      let tl = anime.timeline({
+        duration: 300,
+      });
+      tl.add({
+        targets: [element],
+        rotate: 15,
+        scale: 1.2,
+      })
+        .add(
+          {
+            targets: [element],
+            rotate: -5,
+            scale: 1.1,
+          },
+          100
+        )
+        .add(
+          {
+            targets: [element],
+            rotate: 0,
+            scale: 1,
+          },
+          200
+        );
     },
 
     /**
@@ -193,9 +337,9 @@ export default {
         {
           targets: ["#mainMenu-btn-priceCheck-idle"],
           translateY: [-40, 0],
-          opacity: 100,
+          opacity: 1,
         },
-        300
+        100
       );
       // remove active flag
       setTimeout(() => {
@@ -227,9 +371,9 @@ export default {
           {
             targets: [".priceCheck-group.active"],
             translateY: [+40, 0],
-            opacity: 100,
+            opacity: 1,
           },
-          300
+          100
         );
       } else {
         $("#priceCheck-group1 > .priceCheck-itemName").text(name);
@@ -249,9 +393,9 @@ export default {
           {
             targets: ["#priceCheck-group1"],
             translateY: [+40, 0],
-            opacity: 100,
+            opacity: 1,
           },
-          300
+          100
         );
       }
 
@@ -261,32 +405,11 @@ export default {
     },
 
     // shopping triggered
-    shopping(id) {
+    shoppingPressed(id) {
+      let self = this;
+
       // button pressed fx
-      let tl = anime.timeline({
-        duration: 300,
-      });
-      tl.add({
-        targets: ["#btn-shopping"],
-        rotate: 15,
-        scale: 1.2,
-      })
-        .add(
-          {
-            targets: ["#btn-shopping"],
-            rotate: -5,
-            scale: 1.1,
-          },
-          100
-        )
-        .add(
-          {
-            targets: ["#btn-shopping"],
-            rotate: 0,
-            scale: 1,
-          },
-          200
-        );
+      this.buttonPressedFx("#btn-shopping");
 
       // main menu quit fx
       setTimeout(() => {
@@ -306,12 +429,13 @@ export default {
       }, 350);
 
       // hide main menu and reset components position
+      // display shopping view
       setTimeout(() => {
         $("#mainMenu").hide();
         anime({
           targets: "#mainMenu-content",
           duration: 1,
-          opacity: 100,
+          opacity: 1,
         });
         anime({
           targets: "#mainMenu-header",
@@ -319,6 +443,9 @@ export default {
           opacity: 100,
           translateY: 0,
         });
+
+        $("#shopping-loader").show();
+        $("#shopping").fadeIn();
       }, 700);
 
       // get user info
@@ -332,22 +459,62 @@ export default {
           },
         })
           .done(function (res) {
-            console.log("success");
-            console.log(res);
+            self.shopping.customer = res;
+            self.shoppingStart();
           })
           .fail(function () {
             console.log("err");
-          })
-          .always(function () {
-            console.log("complete");
           });
-      }, 700);
+        // .always(function () {});
+      }, 710);
+    },
+
+    /**
+     * shopping
+     */
+    resetCustomer() {
+      this.shopping.customer = {
+        name: null,
+      };
+    },
+
+    shoppingStart() {
+      // hide loader
+      $("#shopping-loader").fadeOut(200);
+
+      setTimeout(() => {
+        $("#shopping-main").show();
+        $("#shopping-sideMenu > *").css("opacity", 0);
+
+        // shopping view intro fx
+        let tl = anime.timeline({
+          easing: "easeOutExpo",
+          duration: 1500,
+        });
+        tl.add({
+          targets: "#shopping-sideMenu",
+          translateX: [400, 0],
+        }).add(
+          {
+            targets: ["#shopping-sideMenu > *"],
+            translateY: [60, 0],
+            opacity: 1,
+            delay: anime.stagger(100)
+          },
+          500
+        );
+      }, 200);
     },
   },
 
   data: function () {
     return {
       checkPrice: { priceTimer: null },
+      shopping: {
+        customer: {
+          name: null,
+        },
+      },
     };
   },
 

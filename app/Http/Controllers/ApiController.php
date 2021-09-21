@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -11,8 +12,8 @@ class ApiController extends Controller
     }
 
     public function getUser($id, Request $request) {
-        sleep(3);
-        return $id;
-        // dd($id, $request->all());
+        sleep(1);
+        $user = DB::table('users')->where('id', $id)->first();
+        return $user;
     }
 }

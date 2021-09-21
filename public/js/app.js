@@ -3525,6 +3525,119 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     var _this = this;
@@ -3532,27 +3645,30 @@ __webpack_require__.r(__webpack_exports__);
     /**
      * For debug
      */
+    // setTimeout(() => {
+    //   this.priceChecked("コカ・コーラ", "200");
+    // }, 300);
+    // setTimeout(() => {
+    //   this.priceChecked("コーラ", "200");
+    // }, 1300);
+    // setTimeout(() => {
+    //   this.priceChecked("ららぽーと", "500");
+    // }, 5800);
+    // setTimeout(() => {
+    //   this.priceChecked("バカヤロ", "456");
+    // }, 13000);
+    // setTimeout(() => {
+    //   this.priceChecked("コカ・コーラ", "200");
+    // }, 14000);
+    // setTimeout(() => {
+    //   this.priceChecked("バカヤロ", "456");
+    // }, 16000);
+    // setTimeout(() => {
+    //   this.shoppingPressed(1);
+    // }, 18000);
     setTimeout(function () {
-      _this.priceChecked("コカ・コーラ", "200");
-    }, 300);
-    setTimeout(function () {
-      _this.priceChecked("コーラ", "200");
-    }, 1300);
-    setTimeout(function () {
-      _this.priceChecked("ららぽーと", "500");
-    }, 5800);
-    setTimeout(function () {
-      _this.priceChecked("バカヤロ", "456");
-    }, 13000);
-    setTimeout(function () {
-      _this.priceChecked("コカ・コーラ", "200");
-    }, 14000);
-    setTimeout(function () {
-      _this.priceChecked("バカヤロ", "456");
-    }, 16000);
-    setTimeout(function () {
-      _this.shopping(1);
-    }, 18000);
+      _this.shoppingPressed(1);
+    }, 200);
   },
   methods: {
     /**
@@ -3562,6 +3678,24 @@ __webpack_require__.r(__webpack_exports__);
       return str.replace(/[A-Za-z0-9]/g, function (s) {
         return String.fromCharCode(s.charCodeAt(0) + 0xfee0);
       });
+    },
+    buttonPressedFx: function buttonPressedFx(element) {
+      var tl = anime.timeline({
+        duration: 300
+      });
+      tl.add({
+        targets: [element],
+        rotate: 15,
+        scale: 1.2
+      }).add({
+        targets: [element],
+        rotate: -5,
+        scale: 1.1
+      }, 100).add({
+        targets: [element],
+        rotate: 0,
+        scale: 1
+      }, 200);
     },
 
     /**
@@ -3581,8 +3715,8 @@ __webpack_require__.r(__webpack_exports__);
       }).add({
         targets: ["#mainMenu-btn-priceCheck-idle"],
         translateY: [-40, 0],
-        opacity: 100
-      }, 300); // remove active flag
+        opacity: 1
+      }, 100); // remove active flag
 
       setTimeout(function () {
         $(".priceCheck-group").removeClass("active");
@@ -3609,8 +3743,8 @@ __webpack_require__.r(__webpack_exports__);
         }).add({
           targets: [".priceCheck-group.active"],
           translateY: [+40, 0],
-          opacity: 100
-        }, 300);
+          opacity: 1
+        }, 100);
       } else {
         $("#priceCheck-group1 > .priceCheck-itemName").text(name);
         $("#priceCheck-group1 > .priceCheck-price").text("￥" + this.toFull(price));
@@ -3627,8 +3761,8 @@ __webpack_require__.r(__webpack_exports__);
         }).add({
           targets: ["#priceCheck-group1"],
           translateY: [+40, 0],
-          opacity: 100
-        }, 300);
+          opacity: 1
+        }, 100);
       }
 
       this.checkPrice.priceTimer = setTimeout(function () {
@@ -3636,26 +3770,12 @@ __webpack_require__.r(__webpack_exports__);
       }, 5000);
     },
     // shopping triggered
-    shopping: function shopping(id) {
+    shoppingPressed: function shoppingPressed(id) {
       var _this3 = this;
 
-      // button pressed fx
-      var tl = anime.timeline({
-        duration: 300
-      });
-      tl.add({
-        targets: ["#btn-shopping"],
-        rotate: 15,
-        scale: 1.2
-      }).add({
-        targets: ["#btn-shopping"],
-        rotate: -5,
-        scale: 1.1
-      }, 100).add({
-        targets: ["#btn-shopping"],
-        rotate: 0,
-        scale: 1
-      }, 200); // main menu quit fx
+      var self = this; // button pressed fx
+
+      this.buttonPressedFx("#btn-shopping"); // main menu quit fx
 
       setTimeout(function () {
         anime({
@@ -3672,13 +3792,14 @@ __webpack_require__.r(__webpack_exports__);
           translateY: -100
         });
       }, 350); // hide main menu and reset components position
+      // display shopping view
 
       setTimeout(function () {
         $("#mainMenu").hide();
         anime({
           targets: "#mainMenu-content",
           duration: 1,
-          opacity: 100
+          opacity: 1
         });
         anime({
           targets: "#mainMenu-header",
@@ -3686,6 +3807,8 @@ __webpack_require__.r(__webpack_exports__);
           opacity: 100,
           translateY: 0
         });
+        $("#shopping-loader").show();
+        $("#shopping").fadeIn();
       }, 700); // get user info
 
       setTimeout(function () {
@@ -3697,20 +3820,54 @@ __webpack_require__.r(__webpack_exports__);
             api_token: _this3.api_token
           }
         }).done(function (res) {
-          console.log("success");
-          console.log(res);
+          self.shopping.customer = res;
+          self.shoppingStart();
         }).fail(function () {
           console.log("err");
-        }).always(function () {
-          console.log("complete");
+        }); // .always(function () {});
+      }, 710);
+    },
+
+    /**
+     * shopping
+     */
+    resetCustomer: function resetCustomer() {
+      this.shopping.customer = {
+        name: null
+      };
+    },
+    shoppingStart: function shoppingStart() {
+      // hide loader
+      $("#shopping-loader").fadeOut(200);
+      setTimeout(function () {
+        $("#shopping-main").show();
+        $("#shopping-sideMenu > *").css("opacity", 0); // shopping view intro fx
+
+        var tl = anime.timeline({
+          easing: "easeOutExpo",
+          duration: 1500
         });
-      }, 700);
+        tl.add({
+          targets: "#shopping-sideMenu",
+          translateX: [400, 0]
+        }).add({
+          targets: ["#shopping-sideMenu > *"],
+          translateY: [60, 0],
+          opacity: 1,
+          delay: anime.stagger(100)
+        }, 500);
+      }, 200);
     }
   },
   data: function data() {
     return {
       checkPrice: {
         priceTimer: null
+      },
+      shopping: {
+        customer: {
+          name: null
+        }
       }
     };
   },
@@ -4755,7 +4912,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/**\n * Global\n */\n#page {\n  height: 100vh;\n  width: 100vw;\n  background: #f1efeb;\n  color: #202020;\n  overflow: hidden;\n}\n.custom-btn {\n  display: grid;\n  place-items: center;\n  border-radius: 40px;\n  box-shadow: 5px 5px 5px #808080;\n  background: #ffffff;\n  color: #007131;\n  text-align: center;\n  font-size: 2em;\n  font-weight: bold;\n  margin: 1em 1em;\n}\n\n/**\n * Main Menu\n */\n#mainMenu {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-columns: auto;\n  grid-template-rows: 10% 90%;\n  text-align: center;\n}\n#mainMenu > * > * > p {\n  font-weight: bold;\n  font-size: 1.8em;\n}\n#mainMenu-header {\n  background: #007131;\n  color: #ffffff;\n  display: grid;\n  place-items: center;\n  border-bottom-left-radius: 40px;\n  border-bottom-right-radius: 40px;\n  font-size: 3em;\n}\n#mainMenu-content {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-template-rows: auto;\n  place-items: center;\n}\n#btn-checkPrice,\n#btn-shopping {\n  height: 300px;\n  width: 300px;\n  border-radius: 60px !important;\n  margin-bottom: 2em !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/**\n * Global\n */\n#page {\n  height: 100vh;\n  width: 100vw;\n  background: #f1efeb;\n  color: #202020;\n  overflow: hidden;\n}\n.custom-btn {\n  display: grid;\n  place-items: center;\n  border-radius: 40px;\n  box-shadow: 5px 5px 5px #808080;\n  background: #ffffff;\n  color: #007131;\n  text-align: center;\n  font-size: 2em;\n  font-weight: bold;\n  margin: 1em 1em;\n}\n\n/**\n * Main Menu\n */\n#mainMenu {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-columns: auto;\n  grid-template-rows: 10% 90%;\n  text-align: center;\n}\n#mainMenu > * > * > p {\n  font-weight: bold;\n  font-size: 1.8em;\n}\n#mainMenu-header {\n  background: #007131;\n  color: #ffffff;\n  display: grid;\n  place-items: center;\n  border-bottom-left-radius: 40px;\n  border-bottom-right-radius: 40px;\n  font-size: 3em;\n}\n#mainMenu-content {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-template-rows: auto;\n  place-items: center;\n}\n#btn-checkPrice,\n#btn-shopping {\n  height: 300px;\n  width: 300px;\n  border-radius: 60px !important;\n  margin-bottom: 2em !important;\n}\n\n/**\n * Shopping\n */\n#shopping {\n  height: 100%;\n  width: 100%;\n}\n#shopping-loader {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  display: grid;\n  place-items: center;\n  grid-template-rows: 100%;\n  grid-template-columns: 100%;\n}\n#shopping-main {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-rows: auto;\n  grid-template-columns: 70% 30%;\n}\n#shopping-content {\n  padding: 3em 3em;\n  font-size: 2em;\n}\n#shopping-sideMenu {\n  background: #007131;\n  border-top-left-radius: 50px;\n  border-bottom-left-radius: 50px;\n  text-align: center;\n  color: #ffffff;\n  padding: 1.5em 0;\n\n  display: grid;\n  grid-template-columns: auto;\n  grid-template-rows: 15% 65% 20%;\n  place-items: center;\n}\n#shopping-sideMenu > p {\n  font-size: 3em;\n  font-weight: bold;\n}\n#shopping-sideMenu-opBtn {\n  width: 100%;\n  height: 100%;\n  display: grid;\n  place-items: center;\n  grid-template-rows: repeat(4, 25%);\n}\n#shopping-sideMenu > * > .custom-btn,\n#shopping-sideMenu > .custom-btn {\n  width: 60%;\n  height: 130px;\n  border-radius: 30px !important;\n  padding: 0.4em 0;\n  box-shadow: 5px 5px 5px #202020 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36192,93 +36349,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "page" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticStyle: { display: "none" }, attrs: { id: "shopping" } }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticStyle: { display: "none" }, attrs: { id: "shopping-main" } },
+        [
+          _c("div", { attrs: { id: "shopping-content" } }, [
+            _vm._v("\n        ララティーナ\n      ")
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "shopping-sideMenu" } }, [
+            _c("p", [_vm._v(_vm._s(_vm.shopping.customer.name) + "　様")]),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3)
+          ])
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "page" } }, [
-      _c("div", { attrs: { id: "mainMenu" } }, [
-        _c("div", { attrs: { id: "mainMenu-header" } }, [
-          _vm._v("iShopセルフレジ")
-        ]),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "mainMenu-content" } }, [
-          _c("div", { attrs: { id: "mainMenu-btn-priceCheck" } }, [
-            _c(
-              "div",
-              { staticClass: "custom-btn", attrs: { id: "btn-checkPrice" } },
-              [
-                _c("div", { attrs: { id: "mainMenu-btn-priceCheck-idle" } }, [
-                  _c("img", {
-                    attrs: {
-                      height: "200",
-                      width: "200",
-                      src:
-                        "https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg",
-                      alt: "icon"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("p", [_vm._v("価格照会")])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "priceCheck-group",
-                    staticStyle: { position: "absolute", opacity: "0" },
-                    attrs: { id: "priceCheck-group1" }
-                  },
-                  [
-                    _c("p", {
-                      staticClass: "priceCheck-itemName",
-                      staticStyle: { margin: "0.25em 0" }
-                    }),
-                    _vm._v(" "),
-                    _c("p", {
-                      staticClass: "priceCheck-price",
-                      staticStyle: { margin: "0.25em 0" }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "priceCheck-group",
-                    staticStyle: { position: "absolute", opacity: "0" },
-                    attrs: { id: "priceCheck-group2" }
-                  },
-                  [
-                    _c("p", {
-                      staticClass: "priceCheck-itemName",
-                      staticStyle: { margin: "0.25em 0" }
-                    }),
-                    _vm._v(" "),
-                    _c("p", {
-                      staticClass: "priceCheck-price",
-                      staticStyle: { margin: "0.25em 0" }
-                    })
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", [_vm._v("商品をスキャンして値段照会")]),
-            _vm._v(" "),
-            _c("p", [_vm._v("Scan item to check price")]),
-            _vm._v(" "),
-            _c("p", [_vm._v("扫描商品查询价格")])
-          ]),
-          _vm._v(" "),
-          _c("div", { attrs: { id: "mainMenu-btn-shopping" } }, [
-            _c(
-              "div",
-              { staticClass: "custom-btn", attrs: { id: "btn-shopping" } },
-              [
+    return _c("div", { attrs: { id: "mainMenu" } }, [
+      _c("div", { attrs: { id: "mainMenu-header" } }, [
+        _vm._v("iShopセルフレジ")
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "mainMenu-content" } }, [
+        _c("div", { attrs: { id: "mainMenu-btn-priceCheck" } }, [
+          _c(
+            "div",
+            { staticClass: "custom-btn", attrs: { id: "btn-checkPrice" } },
+            [
+              _c("div", { attrs: { id: "mainMenu-btn-priceCheck-idle" } }, [
                 _c("img", {
                   attrs: {
                     height: "200",
@@ -36289,21 +36402,156 @@ var staticRenderFns = [
                   }
                 }),
                 _vm._v(" "),
-                _c("p", [_vm._v("お買い物")])
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", [_vm._v("IDカードをスキャンしてお買い物")]),
-            _vm._v(" "),
-            _c("p", [_vm._v("Scan ID Card to shopping")]),
-            _vm._v(" "),
-            _c("p", [_vm._v("扫描ID卡开始购物")])
-          ])
+                _c("p", [_vm._v("価格照会")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "priceCheck-group",
+                  staticStyle: { position: "absolute", opacity: "0" },
+                  attrs: { id: "priceCheck-group1" }
+                },
+                [
+                  _c("p", {
+                    staticClass: "priceCheck-itemName",
+                    staticStyle: { margin: "0.25em 0" }
+                  }),
+                  _vm._v(" "),
+                  _c("p", {
+                    staticClass: "priceCheck-price",
+                    staticStyle: { margin: "0.25em 0" }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "priceCheck-group",
+                  staticStyle: { position: "absolute", opacity: "0" },
+                  attrs: { id: "priceCheck-group2" }
+                },
+                [
+                  _c("p", {
+                    staticClass: "priceCheck-itemName",
+                    staticStyle: { margin: "0.25em 0" }
+                  }),
+                  _vm._v(" "),
+                  _c("p", {
+                    staticClass: "priceCheck-price",
+                    staticStyle: { margin: "0.25em 0" }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("商品をスキャンして値段照会")]),
+          _vm._v(" "),
+          _c("p", [_vm._v("Scan item to check price")]),
+          _vm._v(" "),
+          _c("p", [_vm._v("扫描商品查询价格")])
+        ]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "mainMenu-btn-shopping" } }, [
+          _c(
+            "div",
+            { staticClass: "custom-btn", attrs: { id: "btn-shopping" } },
+            [
+              _c("img", {
+                attrs: {
+                  height: "200",
+                  width: "200",
+                  src:
+                    "https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg",
+                  alt: "icon"
+                }
+              }),
+              _vm._v(" "),
+              _c("p", [_vm._v("お買い物")])
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("IDカードをスキャンしてお買い物")]),
+          _vm._v(" "),
+          _c("p", [_vm._v("Scan ID Card to shopping")]),
+          _vm._v(" "),
+          _c("p", [_vm._v("扫描ID卡开始购物")])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "shopping" } })
+      ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { display: "none" }, attrs: { id: "shopping-loader" } },
+      [_c("div", { staticClass: "ui active centered inline loader huge" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "shopping-sideMenu-opBtn" } }, [
+      _c(
+        "div",
+        { staticClass: "custom-btn", attrs: { id: "btn-shopping-add" } },
+        [
+          _c("img", {
+            attrs: {
+              height: "60",
+              width: "60",
+              src:
+                "https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg",
+              alt: "icon"
+            }
+          }),
+          _vm._v("\n            追加\n          ")
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "custom-btn", attrs: { id: "btn-shopping-remove" } },
+        [
+          _c("img", {
+            attrs: {
+              height: "60",
+              width: "60",
+              src:
+                "https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg",
+              alt: "icon"
+            }
+          }),
+          _vm._v("\n            削除\n          ")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "custom-btn", attrs: { id: "btn-shopping-checkout" } },
+      [
+        _c("img", {
+          attrs: {
+            height: "60",
+            width: "60",
+            src:
+              "https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg",
+            alt: "icon"
+          }
+        }),
+        _vm._v("\n          チェックアウト\n        ")
+      ]
+    )
   }
 ]
 render._withStripped = true
