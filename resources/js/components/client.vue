@@ -62,10 +62,33 @@
         <div class="ui active centered inline loader huge"></div>
       </div>
 
+      <!-- shopping list -->
       <div id="shopping-main" style="display: none">
-
         <div id="shopping-content">
-          ララティーナ
+          <div id="shopping-list">
+            <div class="shopping-list-item">
+              <p>コカ・コーラ</p>
+              <p style="text-align: end">1</p>
+              <p style="text-align: end">x</p>
+              <p style="text-align: end">￥100</p>
+            </div>
+          </div>
+          <div id="shopping-sum">
+            <div id="shopping-sum-discount">
+              <div class="shopping-sum-discount-row">
+                <p>サマーセール</p>
+                <p style="text-align: end">1</p>
+              </div>
+              <div class="shopping-sum-discount-row">
+                <p>サマーセール</p>
+                <p style="text-align: end">1</p>
+              </div>
+            </div>
+            <div id="shopping-sum-total">
+              <p style="font-size: 0.8em; letter-spacing: 0.2em">支払い金額</p>
+              <p style="font-size: 2.4em; font-weight: bolder">￥200</p>
+            </div>
+          </div>
         </div>
 
         <!-- side menu -->
@@ -205,8 +228,57 @@
 #shopping-content {
   padding: 3em 3em;
   font-size: 2em;
+  font-weight: bold;
+  display: grid;
+  grid-template-rows: 80% 20%;
+  grid-template-columns: auto;
 }
 
+.shopping-list-item {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 60% 10% 10% 20%;
+}
+.shopping-list-item > p {
+  margin-bottom: 0.5em;
+}
+
+#shopping-sum {
+  height: 100%;
+  width: 100%;
+  padding: 0 0.2em;
+  padding-top: 1em !important;
+  border-top: #d0d0d0 1px solid;
+
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 75% 25%;
+}
+
+#shopping-sum-discount {
+  font-weight: normal;
+  font-size: 0.75em;
+}
+
+.shopping-sum-discount-row {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 33% 20%;
+}
+.shopping-sum-discount-row > p {
+  margin-bottom: 0.3em;
+}
+
+#shopping-sum-total {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 30% 70%;
+  align-items: center;
+}
+#shopping-sum-total > p {
+  margin: 0;
+  text-align: center;
+}
 
 #shopping-sideMenu {
   background: #007131;
@@ -276,8 +348,11 @@ export default {
     // }, 18000);
 
     setTimeout(() => {
-      this.shoppingPressed(1);
-    }, 200);
+      this.shoppingPressed(2);
+    }, 500);
+    setTimeout(() => {
+      this.checkOutPressed();
+    }, 5000);
   },
 
   methods: {
@@ -404,7 +479,7 @@ export default {
       }, 5000);
     },
 
-    // shopping triggered
+    // shopping triggered, start shopping
     shoppingPressed(id) {
       let self = this;
 
@@ -415,13 +490,13 @@ export default {
       setTimeout(() => {
         anime({
           targets: "#mainMenu-content",
-          duration: 300,
+          duration: 600,
           easing: "easeInOutCubic",
           opacity: 0,
         });
         anime({
           targets: "#mainMenu-header",
-          duration: 300,
+          duration: 600,
           easing: "easeInOutCubic",
           opacity: 0,
           translateY: -100,
@@ -446,7 +521,7 @@ export default {
 
         $("#shopping-loader").show();
         $("#shopping").fadeIn();
-      }, 700);
+      }, 800);
 
       // get user info
       setTimeout(() => {
@@ -466,15 +541,18 @@ export default {
             console.log("err");
           });
         // .always(function () {});
-      }, 710);
+      }, 810);
     },
 
     /**
      * shopping
      */
     resetCustomer() {
-      this.shopping.customer = {
-        name: null,
+      this.shopping = {
+        customer: {
+          name: null,
+        },
+        items: [],
       };
     },
 
@@ -482,9 +560,9 @@ export default {
       // hide loader
       $("#shopping-loader").fadeOut(200);
 
+      // show shopping main view
       setTimeout(() => {
         $("#shopping-main").show();
-        $("#shopping-sideMenu > *").css("opacity", 0);
 
         // shopping view intro fx
         let tl = anime.timeline({
@@ -494,16 +572,29 @@ export default {
         tl.add({
           targets: "#shopping-sideMenu",
           translateX: [400, 0],
-        }).add(
-          {
-            targets: ["#shopping-sideMenu > *"],
-            translateY: [60, 0],
-            opacity: 1,
-            delay: anime.stagger(100)
-          },
-          500
-        );
+        })
+          .add(
+            {
+              targets: ["#shopping-sideMenu > *"],
+              translateY: [60, 0],
+              opacity: [0, 1],
+              delay: anime.stagger(100),
+            },
+            500
+          )
+          .add(
+            {
+              targets: ["#shopping-sum"],
+              translateX: [-100, 0],
+              opacity: [0, 1],
+            },
+            500
+          );
       }, 200);
+    },
+
+    checkOutPressed() {
+      this.buttonPressedFx("#btn-shopping-checkout");
     },
   },
 
@@ -514,6 +605,7 @@ export default {
         customer: {
           name: null,
         },
+        items: [],
       },
     };
   },

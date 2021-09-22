@@ -3638,6 +3638,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     var _this = this;
@@ -3667,8 +3739,11 @@ __webpack_require__.r(__webpack_exports__);
     //   this.shoppingPressed(1);
     // }, 18000);
     setTimeout(function () {
-      _this.shoppingPressed(1);
-    }, 200);
+      _this.shoppingPressed(2);
+    }, 500);
+    setTimeout(function () {
+      _this.checkOutPressed();
+    }, 5000);
   },
   methods: {
     /**
@@ -3769,7 +3844,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.resetCheckPriceBtn();
       }, 5000);
     },
-    // shopping triggered
+    // shopping triggered, start shopping
     shoppingPressed: function shoppingPressed(id) {
       var _this3 = this;
 
@@ -3780,13 +3855,13 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         anime({
           targets: "#mainMenu-content",
-          duration: 300,
+          duration: 600,
           easing: "easeInOutCubic",
           opacity: 0
         });
         anime({
           targets: "#mainMenu-header",
-          duration: 300,
+          duration: 600,
           easing: "easeInOutCubic",
           opacity: 0,
           translateY: -100
@@ -3809,7 +3884,7 @@ __webpack_require__.r(__webpack_exports__);
         });
         $("#shopping-loader").show();
         $("#shopping").fadeIn();
-      }, 700); // get user info
+      }, 800); // get user info
 
       setTimeout(function () {
         $.ajax({
@@ -3825,23 +3900,26 @@ __webpack_require__.r(__webpack_exports__);
         }).fail(function () {
           console.log("err");
         }); // .always(function () {});
-      }, 710);
+      }, 810);
     },
 
     /**
      * shopping
      */
     resetCustomer: function resetCustomer() {
-      this.shopping.customer = {
-        name: null
+      this.shopping = {
+        customer: {
+          name: null
+        },
+        items: []
       };
     },
     shoppingStart: function shoppingStart() {
       // hide loader
-      $("#shopping-loader").fadeOut(200);
+      $("#shopping-loader").fadeOut(200); // show shopping main view
+
       setTimeout(function () {
-        $("#shopping-main").show();
-        $("#shopping-sideMenu > *").css("opacity", 0); // shopping view intro fx
+        $("#shopping-main").show(); // shopping view intro fx
 
         var tl = anime.timeline({
           easing: "easeOutExpo",
@@ -3853,10 +3931,17 @@ __webpack_require__.r(__webpack_exports__);
         }).add({
           targets: ["#shopping-sideMenu > *"],
           translateY: [60, 0],
-          opacity: 1,
+          opacity: [0, 1],
           delay: anime.stagger(100)
+        }, 500).add({
+          targets: ["#shopping-sum"],
+          translateX: [-100, 0],
+          opacity: [0, 1]
         }, 500);
       }, 200);
+    },
+    checkOutPressed: function checkOutPressed() {
+      this.buttonPressedFx("#btn-shopping-checkout");
     }
   },
   data: function data() {
@@ -3867,7 +3952,8 @@ __webpack_require__.r(__webpack_exports__);
       shopping: {
         customer: {
           name: null
-        }
+        },
+        items: []
       }
     };
   },
@@ -4912,7 +4998,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/**\n * Global\n */\n#page {\n  height: 100vh;\n  width: 100vw;\n  background: #f1efeb;\n  color: #202020;\n  overflow: hidden;\n}\n.custom-btn {\n  display: grid;\n  place-items: center;\n  border-radius: 40px;\n  box-shadow: 5px 5px 5px #808080;\n  background: #ffffff;\n  color: #007131;\n  text-align: center;\n  font-size: 2em;\n  font-weight: bold;\n  margin: 1em 1em;\n}\n\n/**\n * Main Menu\n */\n#mainMenu {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-columns: auto;\n  grid-template-rows: 10% 90%;\n  text-align: center;\n}\n#mainMenu > * > * > p {\n  font-weight: bold;\n  font-size: 1.8em;\n}\n#mainMenu-header {\n  background: #007131;\n  color: #ffffff;\n  display: grid;\n  place-items: center;\n  border-bottom-left-radius: 40px;\n  border-bottom-right-radius: 40px;\n  font-size: 3em;\n}\n#mainMenu-content {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-template-rows: auto;\n  place-items: center;\n}\n#btn-checkPrice,\n#btn-shopping {\n  height: 300px;\n  width: 300px;\n  border-radius: 60px !important;\n  margin-bottom: 2em !important;\n}\n\n/**\n * Shopping\n */\n#shopping {\n  height: 100%;\n  width: 100%;\n}\n#shopping-loader {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  display: grid;\n  place-items: center;\n  grid-template-rows: 100%;\n  grid-template-columns: 100%;\n}\n#shopping-main {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-rows: auto;\n  grid-template-columns: 70% 30%;\n}\n#shopping-content {\n  padding: 3em 3em;\n  font-size: 2em;\n}\n#shopping-sideMenu {\n  background: #007131;\n  border-top-left-radius: 50px;\n  border-bottom-left-radius: 50px;\n  text-align: center;\n  color: #ffffff;\n  padding: 1.5em 0;\n\n  display: grid;\n  grid-template-columns: auto;\n  grid-template-rows: 15% 65% 20%;\n  place-items: center;\n}\n#shopping-sideMenu > p {\n  font-size: 3em;\n  font-weight: bold;\n}\n#shopping-sideMenu-opBtn {\n  width: 100%;\n  height: 100%;\n  display: grid;\n  place-items: center;\n  grid-template-rows: repeat(4, 25%);\n}\n#shopping-sideMenu > * > .custom-btn,\n#shopping-sideMenu > .custom-btn {\n  width: 60%;\n  height: 130px;\n  border-radius: 30px !important;\n  padding: 0.4em 0;\n  box-shadow: 5px 5px 5px #202020 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/**\n * Global\n */\n#page {\n  height: 100vh;\n  width: 100vw;\n  background: #f1efeb;\n  color: #202020;\n  overflow: hidden;\n}\n.custom-btn {\n  display: grid;\n  place-items: center;\n  border-radius: 40px;\n  box-shadow: 5px 5px 5px #808080;\n  background: #ffffff;\n  color: #007131;\n  text-align: center;\n  font-size: 2em;\n  font-weight: bold;\n  margin: 1em 1em;\n}\n\n/**\n * Main Menu\n */\n#mainMenu {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-columns: auto;\n  grid-template-rows: 10% 90%;\n  text-align: center;\n}\n#mainMenu > * > * > p {\n  font-weight: bold;\n  font-size: 1.8em;\n}\n#mainMenu-header {\n  background: #007131;\n  color: #ffffff;\n  display: grid;\n  place-items: center;\n  border-bottom-left-radius: 40px;\n  border-bottom-right-radius: 40px;\n  font-size: 3em;\n}\n#mainMenu-content {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-template-rows: auto;\n  place-items: center;\n}\n#btn-checkPrice,\n#btn-shopping {\n  height: 300px;\n  width: 300px;\n  border-radius: 60px !important;\n  margin-bottom: 2em !important;\n}\n\n/**\n * Shopping\n */\n#shopping {\n  height: 100%;\n  width: 100%;\n}\n#shopping-loader {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  display: grid;\n  place-items: center;\n  grid-template-rows: 100%;\n  grid-template-columns: 100%;\n}\n#shopping-main {\n  height: 100%;\n  width: 100%;\n  display: grid;\n  grid-template-rows: auto;\n  grid-template-columns: 70% 30%;\n}\n#shopping-content {\n  padding: 3em 3em;\n  font-size: 2em;\n  font-weight: bold;\n  display: grid;\n  grid-template-rows: 80% 20%;\n  grid-template-columns: auto;\n}\n.shopping-list-item {\n  display: grid;\n  grid-template-rows: auto;\n  grid-template-columns: 60% 10% 10% 20%;\n}\n.shopping-list-item > p {\n  margin-bottom: 0.5em;\n}\n#shopping-sum {\n  height: 100%;\n  width: 100%;\n  padding: 0 0.2em;\n  padding-top: 1em !important;\n  border-top: #d0d0d0 1px solid;\n\n  display: grid;\n  grid-template-rows: auto;\n  grid-template-columns: 75% 25%;\n}\n#shopping-sum-discount {\n  font-weight: normal;\n  font-size: 0.75em;\n}\n.shopping-sum-discount-row {\n  display: grid;\n  grid-template-rows: auto;\n  grid-template-columns: 33% 20%;\n}\n.shopping-sum-discount-row > p {\n  margin-bottom: 0.3em;\n}\n#shopping-sum-total {\n  display: grid;\n  grid-template-columns: auto;\n  grid-template-rows: 30% 70%;\n  align-items: center;\n}\n#shopping-sum-total > p {\n  margin: 0;\n  text-align: center;\n}\n#shopping-sideMenu {\n  background: #007131;\n  border-top-left-radius: 50px;\n  border-bottom-left-radius: 50px;\n  text-align: center;\n  color: #ffffff;\n  padding: 1.5em 0;\n\n  display: grid;\n  grid-template-columns: auto;\n  grid-template-rows: 15% 65% 20%;\n  place-items: center;\n}\n#shopping-sideMenu > p {\n  font-size: 3em;\n  font-weight: bold;\n}\n#shopping-sideMenu-opBtn {\n  width: 100%;\n  height: 100%;\n  display: grid;\n  place-items: center;\n  grid-template-rows: repeat(4, 25%);\n}\n#shopping-sideMenu > * > .custom-btn,\n#shopping-sideMenu > .custom-btn {\n  width: 60%;\n  height: 130px;\n  border-radius: 30px !important;\n  padding: 0.4em 0;\n  box-shadow: 5px 5px 5px #202020 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36359,16 +36445,14 @@ var render = function() {
         "div",
         { staticStyle: { display: "none" }, attrs: { id: "shopping-main" } },
         [
-          _c("div", { attrs: { id: "shopping-content" } }, [
-            _vm._v("\n        ララティーナ\n      ")
-          ]),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { attrs: { id: "shopping-sideMenu" } }, [
             _c("p", [_vm._v(_vm._s(_vm.shopping.customer.name) + "　様")]),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._m(3),
             _vm._v(" "),
-            _vm._m(3)
+            _vm._m(4)
           ])
         ]
       )
@@ -36491,6 +36575,56 @@ var staticRenderFns = [
       { staticStyle: { display: "none" }, attrs: { id: "shopping-loader" } },
       [_c("div", { staticClass: "ui active centered inline loader huge" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "shopping-content" } }, [
+      _c("div", { attrs: { id: "shopping-list" } }, [
+        _c("div", { staticClass: "shopping-list-item" }, [
+          _c("p", [_vm._v("コカ・コーラ")]),
+          _vm._v(" "),
+          _c("p", { staticStyle: { "text-align": "end" } }, [_vm._v("1")]),
+          _vm._v(" "),
+          _c("p", { staticStyle: { "text-align": "end" } }, [_vm._v("x")]),
+          _vm._v(" "),
+          _c("p", { staticStyle: { "text-align": "end" } }, [_vm._v("￥100")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "shopping-sum" } }, [
+        _c("div", { attrs: { id: "shopping-sum-discount" } }, [
+          _c("div", { staticClass: "shopping-sum-discount-row" }, [
+            _c("p", [_vm._v("サマーセール")]),
+            _vm._v(" "),
+            _c("p", { staticStyle: { "text-align": "end" } }, [_vm._v("1")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "shopping-sum-discount-row" }, [
+            _c("p", [_vm._v("サマーセール")]),
+            _vm._v(" "),
+            _c("p", { staticStyle: { "text-align": "end" } }, [_vm._v("1")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "shopping-sum-total" } }, [
+          _c(
+            "p",
+            {
+              staticStyle: { "font-size": "0.8em", "letter-spacing": "0.2em" }
+            },
+            [_vm._v("支払い金額")]
+          ),
+          _vm._v(" "),
+          _c(
+            "p",
+            { staticStyle: { "font-size": "2.4em", "font-weight": "bolder" } },
+            [_vm._v("￥200")]
+          )
+        ])
+      ])
+    ])
   },
   function() {
     var _vm = this
