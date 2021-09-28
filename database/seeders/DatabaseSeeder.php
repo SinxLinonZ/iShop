@@ -30,15 +30,27 @@ class DatabaseSeeder extends Seeder
             'email' => "asd.asd@asd.fgh",
             'password' => Hash::make('1234qwer'),
             "role_id" => 1,
-            'api_token' => Str::random(60),
+            'api_token' => Str::random(60)
         ]);
         DB::table('users')->insert([
             'name' => "Client",
             'email' => "aasd.asd@asd.fgh",
             'password' => Hash::make('1234qwer'),
             "role_id" => 2,
-            'api_token' => Str::random(60),
+            'api_token' => Str::random(60)
+        ]);
 
+        db::table('items')->insert([
+            [
+                'jan_code' => "4902102072618",
+                'name' => "コカ・コーラ",
+                'price' => 100
+            ],
+            [
+                'jan_code' => "4548779701033",
+                'name' => "日清　沖縄風ソーキそば",
+                'price' => 150
+            ]
         ]);
     }
 }

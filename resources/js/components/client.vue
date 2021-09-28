@@ -91,10 +91,30 @@
           </div>
         </div>
 
+        <!-- pay view -->
+        <div id="shopping-payment" style="display: none">
+          <div style="width: 100%; height: 100%; display: grid; place-items: center">
+            <div style="height: fit-content">
+              <p style="text-align: center; margin-bottom: .8em">IDカードをスキャンしてお支払い確定</p>
+              <p style="text-align: center; margin-bottom: .8em">Scan ID Card to confirm payment</p>
+              <p style="text-align: center; margin-bottom: .8em">扫描ID卡确认付款</p>
+            </div>
+          </div>
+
+          <div style="width: 100%; height: 100%; border-top: #d0d0d0 1px solid; border-bottom: #d0d0d0 1px solid">
+
+          </div>
+          <p id="msg-overdraft" style="text-align: end; margin-top: .5em; font-size: .8em">※ー￥500まで貸越できます</p>
+        </div>
+
         <!-- side menu -->
         <div id="shopping-sideMenu">
-          <p>{{ shopping.customer.name }}　様</p>
-          <div id="shopping-sideMenu-opBtn">
+          <p id="customer-name" style="margin: 0">
+            {{ shopping.customer.name }}　様
+          </p>
+
+          <!-- shopping button group -->
+          <div id="shopping-sideMenu-shoppingBtnGrp">
             <div class="custom-btn" id="btn-shopping-add">
               <img
                 height="60"
@@ -114,14 +134,42 @@
               削除
             </div>
           </div>
-          <div class="custom-btn" id="btn-shopping-checkout">
-            <img
-              height="60"
-              width="60"
-              src="https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg"
-              alt="icon"
-            />
-            チェックアウト
+
+          <div id="shopping-sideMenu-checkoutBtnGrp">
+            <div class="custom-btn" id="btn-shopping-checkout">
+              <img
+                height="60"
+                width="60"
+                src="https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg"
+                alt="icon"
+              />
+              チェックアウト
+            </div>
+          </div>
+
+          <!-- payment button group -->
+          <div id="payment-sideMenu-optBtnGrp" style="display: none">
+            <div class="custom-btn" id="btn-payment-back">
+              <img
+                height="60"
+                width="60"
+                src="https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg"
+                alt="icon"
+              />
+              戻る
+            </div>
+            <div class="custom-btn" id="btn-payment-cancel" style="color: #CC0000">
+              <img
+                height="60"
+                width="60"
+                src="https://png.pngtree.com/png-clipart/20191120/original/pngtree-barcode-scanner-machine-glyph-icon-vector-png-image_5058438.jpg"
+                alt="icon"
+              />
+              キャンセル
+            </div>
+          </div>
+          <div id="payment-sideMenu-bottom" style="display: none">
+            <p></p>
           </div>
         </div>
       </div>
@@ -280,6 +328,15 @@
   text-align: center;
 }
 
+#shopping-payment {
+  padding: 3em 3em;
+  font-size: 2em;
+  font-weight: bold;
+  display: grid;
+  grid-template-rows: 35% 60% 5%;
+  grid-template-columns: auto;
+}
+
 #shopping-sideMenu {
   background: #007131;
   border-top-left-radius: 50px;
@@ -290,7 +347,7 @@
 
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 15% 65% 20%;
+  grid-template-rows: 15% 60% 25%;
   place-items: center;
 }
 
@@ -299,16 +356,22 @@
   font-weight: bold;
 }
 
-#shopping-sideMenu-opBtn {
+#shopping-sideMenu-shoppingBtnGrp,
+#payment-sideMenu-optBtnGrp {
   width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
-  grid-template-rows: repeat(4, 25%);
+  grid-template-rows: 30% 30% 30%;
+}
+#shopping-sideMenu-checkoutBtnGrp {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
 }
 
-#shopping-sideMenu > * > .custom-btn,
-#shopping-sideMenu > .custom-btn {
+#shopping-sideMenu > * > .custom-btn {
   width: 60%;
   height: 130px;
   border-radius: 30px !important;
@@ -575,7 +638,11 @@ export default {
         })
           .add(
             {
-              targets: ["#shopping-sideMenu > *"],
+              targets: [
+                "#customer-name",
+                "#shopping-sideMenu-shoppingBtnGrp > .custom-btn",
+                "#shopping-sideMenu-checkoutBtnGrp",
+              ],
               translateY: [60, 0],
               opacity: [0, 1],
               delay: anime.stagger(100),
@@ -593,8 +660,62 @@ export default {
       }, 200);
     },
 
+    // check out
     checkOutPressed() {
+      // Button pressed fx
       this.buttonPressedFx("#btn-shopping-checkout");
+
+      // View switchment
+      // Shopping list view quit fx
+      setTimeout(() => {
+        anime({
+          easing: "easeOutExpo",
+          duration: 800,
+          targets: ["#shopping-content"],
+          translateX: -100,
+          opacity: 0,
+        });
+        anime({
+          easing: "easeOutExpo",
+          duration: 800,
+          targets: [
+            "#shopping-sideMenu-shoppingBtnGrp",
+            "#shopping-sideMenu-checkoutBtnGrp",
+          ],
+          translateY: 100,
+          opacity: 0,
+        });
+      }, 350);
+
+      // Payment view intro fx
+      setTimeout(() => {
+        $("#shopping-content").hide();
+        $("#shopping-sideMenu-shoppingBtnGrp").hide();
+        $("#shopping-sideMenu-checkoutBtnGrp").hide();
+        $("#shopping-payment").show();
+        $("#payment-sideMenu-optBtnGrp").show();
+        $("#payment-sideMenu-bottom").show();
+
+        anime({
+          easing: "easeOutExpo",
+          duration: 800,
+          targets: ["#shopping-payment"],
+          translateX: [-100, 0],
+          opacity: [0, 1],
+        });
+        anime({
+          easing: "easeOutExpo",
+          duration: 800,
+          targets: [
+            "#payment-sideMenu-optBtnGrp > *",
+            "#payment-sideMenu-bottom",
+          ],
+          translateY: [60, 0],
+          opacity: [0, 1],
+          delay: anime.stagger(100),
+        });
+      }, 1150);
+
     },
   },
 
