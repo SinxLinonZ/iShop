@@ -93,18 +93,41 @@
 
         <!-- pay view -->
         <div id="shopping-payment" style="display: none">
-          <div style="width: 100%; height: 100%; display: grid; place-items: center">
+          <div
+            style="
+              width: 100%;
+              height: 100%;
+              display: grid;
+              place-items: center;
+            "
+          >
             <div style="height: fit-content">
-              <p style="text-align: center; margin-bottom: .8em">IDカードをスキャンしてお支払い確定</p>
-              <p style="text-align: center; margin-bottom: .8em">Scan ID Card to confirm payment</p>
-              <p style="text-align: center; margin-bottom: .8em">扫描ID卡确认付款</p>
+              <p style="text-align: center; margin-bottom: 0.8em">
+                IDカードをスキャンしてお支払い確定
+              </p>
+              <p style="text-align: center; margin-bottom: 0.8em">
+                Scan ID Card to confirm payment
+              </p>
+              <p style="text-align: center; margin-bottom: 0.8em">
+                扫描ID卡确认付款
+              </p>
             </div>
           </div>
 
-          <div style="width: 100%; height: 100%; border-top: #d0d0d0 1px solid; border-bottom: #d0d0d0 1px solid">
-
-          </div>
-          <p id="msg-overdraft" style="text-align: end; margin-top: .5em; font-size: .8em">※ー￥500まで貸越できます</p>
+          <div
+            style="
+              width: 100%;
+              height: 100%;
+              border-top: #d0d0d0 1px solid;
+              border-bottom: #d0d0d0 1px solid;
+            "
+          ></div>
+          <p
+            id="msg-overdraft"
+            style="text-align: end; margin-top: 0.5em; font-size: 0.8em"
+          >
+            ※ー￥500まで貸越できます
+          </p>
         </div>
 
         <!-- side menu -->
@@ -158,7 +181,11 @@
               />
               戻る
             </div>
-            <div class="custom-btn" id="btn-payment-cancel" style="color: #CC0000">
+            <div
+              class="custom-btn"
+              id="btn-payment-cancel"
+              style="color: #cc0000"
+            >
               <img
                 height="60"
                 width="60"
@@ -188,6 +215,7 @@
   background: #f1efeb;
   color: #202020;
   overflow: hidden;
+  font-family: "Noto Sans JP", "Noto Sans SC", sans-serif;
 }
 
 .custom-btn {
@@ -387,42 +415,43 @@ export default {
     /**
      * For debug
      */
+    (() => {
+      // setTimeout(() => {
+      //   this.priceChecked("コカ・コーラ", "200");
+      // }, 300);
+      // setTimeout(() => {
+      //   this.priceChecked("コーラ", "200");
+      // }, 1300);
+      // setTimeout(() => {
+      //   this.priceChecked("ららぽーと", "500");
+      // }, 5800);
+      // setTimeout(() => {
+      //   this.priceChecked("バカヤロ", "456");
+      // }, 13000);
+      // setTimeout(() => {
+      //   this.priceChecked("コカ・コーラ", "200");
+      // }, 14000);
+      // setTimeout(() => {
+      //   this.priceChecked("バカヤロ", "456");
+      // }, 16000);
+      // setTimeout(() => {
+      //   this.shoppingPressed(1);
+      // }, 18000);
 
-    // setTimeout(() => {
-    //   this.priceChecked("コカ・コーラ", "200");
-    // }, 300);
-    // setTimeout(() => {
-    //   this.priceChecked("コーラ", "200");
-    // }, 1300);
-    // setTimeout(() => {
-    //   this.priceChecked("ららぽーと", "500");
-    // }, 5800);
-    // setTimeout(() => {
-    //   this.priceChecked("バカヤロ", "456");
-    // }, 13000);
-    // setTimeout(() => {
-    //   this.priceChecked("コカ・コーラ", "200");
-    // }, 14000);
-    // setTimeout(() => {
-    //   this.priceChecked("バカヤロ", "456");
-    // }, 16000);
-    // setTimeout(() => {
-    //   this.shoppingPressed(1);
-    // }, 18000);
-
-    setTimeout(() => {
-      this.shoppingPressed(2);
-    }, 500);
-    setTimeout(() => {
-      this.checkOutPressed();
-    }, 5000);
+      setTimeout(() => {
+        this.shoppingPressed(2);
+      }, 500);
+      setTimeout(() => {
+        this.checkOutPressed();
+      }, 5000);
+    })();
   },
 
   methods: {
     /**
      * utilities
      */
-    toFull(str) {
+    CharToFull(str) {
       return str.replace(/[A-Za-z0-9]/g, function (s) {
         return String.fromCharCode(s.charCodeAt(0) + 0xfee0);
       });
@@ -491,7 +520,7 @@ export default {
 
         $(".priceCheck-group:not(.active) > .priceCheck-itemName").text(name);
         $(".priceCheck-group:not(.active) > .priceCheck-price").text(
-          "￥" + this.toFull(price)
+          "￥" + this.CharToFull(price)
         );
         let nowActive = $(".priceCheck-group.active");
         let nextActive = $(".priceCheck-group:not(.active)");
@@ -516,7 +545,7 @@ export default {
       } else {
         $("#priceCheck-group1 > .priceCheck-itemName").text(name);
         $("#priceCheck-group1 > .priceCheck-price").text(
-          "￥" + this.toFull(price)
+          "￥" + this.CharToFull(price)
         );
         $("#priceCheck-group1").addClass("active");
 
@@ -715,7 +744,6 @@ export default {
           delay: anime.stagger(100),
         });
       }, 1150);
-
     },
   },
 
